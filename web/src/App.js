@@ -6,6 +6,7 @@ import ProfilePage from "./pages/ProfilePage";
 import SearchPage from "./pages/SearchPage";
 import CategoryPage from "./pages/CategoryPage";
 import ContactPage from "./pages/ContactPage";
+import AdminPage from "./pages/AdminPage";
 
 import { UseAuthStore } from "./utils/store";
 
@@ -42,6 +43,7 @@ function App() {
         <Route exact path="/profile/:name" element={<ProfilePage />}></Route>
         <Route exact path="/category/:name" element={<CategoryPage />}></Route>
         <Route exact path="/contact" element={<ContactPage />}></Route>
+        <Route exact path="/admin" element={<AdminPage />}></Route>
       </Routes>
     </Router>
   );

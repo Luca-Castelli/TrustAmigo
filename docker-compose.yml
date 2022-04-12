@@ -3,9 +3,9 @@ version: "3.8"
 services:
   db:
     container_name: db
-    image: postgres:13-alpine
+    image: postgres:14-alpine
     volumes:
-      - ./db/postgres_data:/var/lib/postgresql/data/
+      - postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./.env.dev.db
   server:

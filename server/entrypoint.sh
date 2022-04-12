@@ -15,5 +15,6 @@ python manage.py create_db
 python manage.py seed_users
 python manage.py seed_company
 python manage.py seed_review
+python manage.py seed_contact_request
 
 exec "$@"

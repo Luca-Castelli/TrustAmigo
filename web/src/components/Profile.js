@@ -9,7 +9,7 @@ import ReviewFormModal from "./ReviewFormModal";
 function Profile() {
   const params = useParams();
   let companyName = params.name;
-  const [company, setCompany] = useState({});
+  const [company, setCompany] = useState({ avg_rating: 0 });
   const [showReviewFormModal, setShowReviewFormModal] = useState(false);
 
   const getCompanyProfile = async () => {
@@ -47,7 +47,7 @@ function Profile() {
             <h2 className="text-3xl font-extrabold text-gray-900 py-2">
               {company.name}
             </h2>
-            <Rating name="read-only" value={company.rating} readOnly />
+            <Rating name="read-only" value={company.avg_rating} readOnly />
             <a href={company.website} className="block text-gray-500 ">
               {company.website}
             </a>

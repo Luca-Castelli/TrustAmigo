@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Rating } from "@mui/material";
 
 function CategoryResultsRow({ item }) {
-  const { name, description, website, logo_url } = item;
+  const { name, description, website, logo_url, avg_rating } = item;
   const rating = 0;
   return (
     <tr className="border-t">
@@ -19,7 +19,7 @@ function CategoryResultsRow({ item }) {
         <a href={website}>{website}</a>
       </td>
       <td>
-        <Rating name="read-only" value={rating} readOnly />
+        <Rating name="read-only" value={avg_rating} readOnly />
       </td>
     </tr>
   );
