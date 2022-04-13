@@ -16,7 +16,9 @@ function SearchResultsRow({ item }) {
       </td>
       <td className="p-2">{description}</td>
       <td className="p-2">
-        <a href={website}>{website}</a>
+        <a href={website} className="text-indigo-500">
+          {website}
+        </a>
       </td>
       <td>
         <Rating name="read-only" value={avg_rating} readOnly />

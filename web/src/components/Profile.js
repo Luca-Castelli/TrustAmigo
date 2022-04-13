@@ -48,7 +48,7 @@ function Profile() {
               {company.name}
             </h2>
             <Rating name="read-only" value={company.avg_rating} readOnly />
-            <a href={company.website} className="block text-gray-500 ">
+            <a href={company.website} className="block text-indigo-500 ">
               {company.website}
             </a>
             <p className="text-gray-500">{company.description}</p>

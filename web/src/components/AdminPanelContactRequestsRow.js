@@ -1,13 +1,15 @@
-import React from "react";
+import { React, useState } from "react";
 
 import { UseAuthStore } from "../utils/store";
 
 function AdminPanelContactRequestsRow({ item, setReloadFlag }) {
   const csrfToken = UseAuthStore((state) => state.csrfToken);
+  const [newStatus, setNewStatus] = useState("");
 
   const {
     id,
-    date,
+    created_date,
+    last_updated_date,
     first_name,
     last_name,
     company_name,
@@ -16,44 +18,56 @@ function AdminPanelContactRequestsRow({ item, setReloadFlag }) {
     status,
   } = item;
 
-  //   const approveReview = async () => {
-  //     const payload = {
-  //       review_id: id,
-  //     };
-  //     try {
-  //       const response = await fetch("/api/data/review/approve", {
-  //         method: "POST",
-  //         credentials: "same-origin",
-  //         headers: {
-  //           "content-type": "application/json",
-  //           "X-CSRFToken": csrfToken,
-  //         },
-  //         body: JSON.stringify(payload),
-  //       });
-  //       const data = await response.json();
-  //       if (response.status !== 200) {
-  //         console.log("Approve failed.");
-  //       } else {
-  //         console.log("Approve successful.");
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //     setReloadFlag(true);
-  //   };
+  const updateStatus = async () => {
+    const payload = {
+      request_id: id,
+      new_status: newStatus,
+    };
+    console.log(payload);
+    try {
+      const response = await fetch("/api/data/contact/update", {
+        method: "POST",
+        credentials: "same-origin",
+        headers: {
+          "content-type": "application/json",
+          "X-CSRFToken": csrfToken,
+        },
+        body: JSON.stringify(payload),
+      });
+      const data = await response.json();
+      if (response.status !== 200) {
+        console.log("Update failed.");
+      } else {
+        console.log("Update successful.");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setReloadFlag(true);
+  };
 
   return (
     <tr className="border-t">
-      <td className="p-2">{date}</td>
+      <td className="p-2">{created_date}</td>
       <td className="p-2">{first_name}</td>
       <td className="p-2">{last_name}</td>
       <td className="p-2">{company_name}</td>
       <td className="p-2">{email}</td>
       <td className="p-2">{classification}</td>
+      <td className="p-2">{last_updated_date}</td>
       <td className="p-2">{status}</td>
       <td>
-        <button className="bg-green-500 rounded-md p-1 w-20">Approve</button>
-        <button className="bg-red-500 rounded-md p-1 ml-2 w-20">Delete</button>
+        <select onChange={(e) => setNewStatus(e.target.value)}>
+          <option>New</option>
+          <option>In Progress</option>
+          <option>Completed</option>
+        </select>
+        <button
+          onClick={updateStatus}
+          className="bg-indigo-500 text-white rounded-md p-1 ml-2"
+        >
+          Update Status
+        </button>
       </td>
     </tr>
   );

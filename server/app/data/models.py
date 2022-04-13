@@ -8,19 +8,20 @@ class Company(db.Model):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(128), unique=True, nullable=False)
-    description = Column(String(5000), nullable=False)
-    category = Column(String(128), nullable=False)
-    location = Column(String(128), nullable=False)
-    employee_count = Column(String(128), nullable=False)
-    logo_url = Column(String(256), nullable=False)
-    contact_email = Column(String(128), nullable=False)
-    website = Column(String(128), nullable=False)
+    description = Column(String(5000))
+    category = Column(String(128))
+    location = Column(String(128))
+    employee_count = Column(String(128))
+    logo_url = Column(String(256))
+    contact_email = Column(String(128))
+    website = Column(String(128))
+    crunchbase_url = Column(String(128))
     verified = Column(Boolean(), default=False, nullable=False)
     paid_subscription = Column(Boolean(), default=False, nullable=False)
 
     reviews = db.relationship("Review", backref='company')
 
-    def __init__(self, name, description, category, location, employee_count, logo_url, contact_email, website):
+    def __init__(self, name, description, category, location, employee_count, logo_url, contact_email, website, crunchbase_url):
         self.name = name
         self.description = description
         self.category = category
@@ -29,9 +30,10 @@ class Company(db.Model):
         self.logo_url = logo_url
         self.contact_email = contact_email
         self.website = website
+        self.crunchbase_url = crunchbase_url
 
     @staticmethod
-    def create_company(name, description, category, location, employee_count, logo_url, contact_email, website):
+    def create_company(name, description, category, location, employee_count, logo_url, contact_email, website, crunchbase_url):
         company = Company(
             name=name,
             description=description,
@@ -41,6 +43,7 @@ class Company(db.Model):
             logo_url=logo_url,
             contact_email=contact_email,
             website=website,
+            crunchbase_url=crunchbase_url,
         )
         try:
             db.session.add(company)
@@ -105,12 +108,13 @@ class Company(db.Model):
             'id'                    :self.id,
             'name'                  :self.name,
             'description'           :self.description,
+            'category'              :self.category,
             'location'              :self.location,
             'employee_count'        :self.employee_count,
             'logo_url'              :self.logo_url,
             'contact_email'         :self.contact_email,
             'website'               :self.website,
-            'category'              :self.category,
+            'crunchbase_url'        :self.crunchbase_url,
             'verified'              :self.verified,
             'paid_subscription'     :self.paid_subscription,
         }
@@ -219,7 +223,8 @@ class Contact_Request(db.Model):
     __tablename__ = "contact_request"
 
     id = Column(Integer, primary_key=True)
-    date = Column(DateTime, nullable=False)
+    created_date = Column(DateTime, nullable=False)
+    last_updated_date = Column(DateTime, nullable=False)
     first_name = Column(String(128), nullable=False)
     last_name = Column(String(128), nullable=False)
     company_name = Column(String(128), nullable=False)
@@ -227,8 +232,9 @@ class Contact_Request(db.Model):
     classification = Column(String(128), nullable=False)
     status = Column(String(128), default="New", nullable=False)
 
-    def __init__(self, date, first_name, last_name, company_name, email, classification):
-        self.date = date
+    def __init__(self, created_date, last_updated_date, first_name, last_name, company_name, email, classification):
+        self.created_date = created_date
+        self.last_updated_date = last_updated_date     
         self.first_name = first_name
         self.last_name = last_name
         self.company_name = company_name
@@ -236,9 +242,10 @@ class Contact_Request(db.Model):
         self.classification = classification
 
     @staticmethod
-    def create_contact_request(date, first_name, last_name, company_name, email, classification):
+    def create_contact_request(created_date, last_updated_date, first_name, last_name, company_name, email, classification):
         contact_request = Contact_Request(
-            date=date,
+            created_date=created_date,
+            last_updated_date=last_updated_date,
             first_name=first_name,
             last_name=last_name,
             company_name=company_name,
@@ -258,16 +265,29 @@ class Contact_Request(db.Model):
             return contact_requests
         else:
             return None
+    
+    @staticmethod
+    def get_contact_request_by_id(request_id):
+        contact_request = db.session.query(Contact_Request).filter(Contact_Request.id == request_id).first()
+        if contact_request:
+            return contact_request
+        else:
+            return None 
 
     def set_status(self, new_status):
-        self.status(new_status)
+        self.status = new_status
+        return True
+    
+    def set_last_updated_date(self, new_last_updated_date):
+        self.last_updated_date = new_last_updated_date
         return True
 
     @property
     def serialize(self):
         return {
             'id'                    :self.id,
-            'date'                  :self.date,
+            'created_date'          :self.created_date,
+            'last_updated_date'     :self.last_updated_date,
             'first_name'            :self.first_name,
             'last_name'             :self.last_name,
             'company_name'          :self.company_name,

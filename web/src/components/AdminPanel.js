@@ -60,9 +60,9 @@ function AdminPanel() {
     <div className="max-w-7xl mx-auto py-12 px-4 text-center">
       <h1 className="font-bold text-left my-8">Admin Panel</h1>
 
-      <h2 className="text-left mt-16">Pending Reviews</h2>
+      <h2 className="text-left mt-16 text-indigo-500">Pending Reviews</h2>
       <table className="table w-full text-left">
-        <thead>
+        <thead className="text-sm">
           <tr>
             <th>Date</th>
             <th>Company</th>
@@ -72,7 +72,7 @@ function AdminPanel() {
             <th></th>
           </tr>
         </thead>
-        <tbody className="text-sm">
+        <tbody className="text-xs">
           {pendingReviews.map((item, key) => {
             return (
               <AdminPanelReviewsRow
@@ -85,21 +85,22 @@ function AdminPanel() {
         </tbody>
       </table>
 
-      <h2 className="text-left mt-16">Contact Requests</h2>
+      <h2 className="text-left mt-16 text-indigo-500">Contact Requests</h2>
       <table className="table w-full text-left">
-        <thead>
+        <thead className="text-sm">
           <tr>
-            <th>Date</th>
+            <th>Created</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Company Name</th>
             <th>Email Address</th>
             <th>Classification</th>
+            <th>Last Updated</th>
             <th>Status</th>
             <th></th>
           </tr>
         </thead>
-        <tbody className="text-sm">
+        <tbody className="text-xs">
           {contactRequests.map((item, key) => {
             return (
               <AdminPanelContactRequestsRow

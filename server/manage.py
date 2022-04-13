@@ -1,5 +1,6 @@
 from decimal import Decimal
 from datetime import datetime
+import csv
 from flask.cli import FlaskGroup
 
 from app import app, db
@@ -35,6 +36,26 @@ def seed_users():
 
 @cli.command("seed_company")
 def seed_company():
+    li = []
+    with open("./assets/organizations.csv", 'r') as file:
+        csv_file = csv.DictReader(file)
+        for row in csv_file:
+            li.append(dict(row))
+    for i in li:
+        if "software" in i['category_groups_list'].lower():
+            name = i['name']
+            description = i['short_description']
+            category = i['category_list']
+            location = i['country_code']
+            employee_count = i['employee_count']
+            logo_url = i['logo_url']
+            contact_email = i['email']
+            website = i['homepage_url']
+            crunchbase_url = i['cb_url']
+            company = Company.create_company(name=name, description=description, category=category, location=location, employee_count=employee_count, logo_url=logo_url, contact_email=contact_email, website=website, crunchbase_url=crunchbase_url)
+            company.set_verified()
+            db.session.commit()
+
     name = "Jeeves"
     description = "Credit card services for start-ups all over the world."
     category = "Analytics"
@@ -43,7 +64,8 @@ def seed_company():
     logo_url = "https://bookface-images.s3.amazonaws.com/logos/092548f7d00ef7086684ba978c12e2cd72eaa34a.png?1620136807"
     contact_email = "info@jeeves.com"
     website = "https://jeeves.webflow.io/"
-    company = Company.create_company(name=name, description=description, category=category, location=location, employee_count=employee_count, logo_url=logo_url, contact_email=contact_email, website=website)
+    crunchbase_url = ""
+    company = Company.create_company(name=name, description=description, category=category, location=location, employee_count=employee_count, logo_url=logo_url, contact_email=contact_email, website=website, crunchbase_url=crunchbase_url)
     company.set_verified()
     db.session.commit()
 
@@ -55,7 +77,8 @@ def seed_company():
     logo_url = "https://e7.pngegg.com/pngimages/281/858/png-clipart-logo-hubspot-inc-marketing-asg-capital-group-pty-ltd-brand-marketing-text-orange.png"
     contact_email = "info@hubspot.com"
     website = "https://www.hubspot.com/"
-    company = Company.create_company(name=name, description=description, category=category, location=location, employee_count=employee_count, logo_url=logo_url, contact_email=contact_email, website=website)
+    crunchbase_url = ""
+    company = Company.create_company(name=name, description=description, category=category, location=location, employee_count=employee_count, logo_url=logo_url, contact_email=contact_email, website=website, crunchbase_url=crunchbase_url)
     company.set_verified()
     db.session.commit()
 

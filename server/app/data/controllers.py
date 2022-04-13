@@ -128,10 +128,27 @@ def handle_contact_request():
     email = request.json.get("email", None)
     classification = request.json.get("classification", None)
 
-    date = datetime.today()
+    created_date = datetime.today()
+    last_updated_date = created_date
 
-    if Contact_Request.create_contact_request(date=date, first_name=first_name, last_name=last_name, company_name=company_name, email=email, classification=classification):
+    if Contact_Request.create_contact_request(created_date=created_date, last_updated_date=last_updated_date, first_name=first_name, last_name=last_name, company_name=company_name, email=email, classification=classification):
         db.session.commit()
         return jsonify(None), 200
     else:
+        return jsonify(None), 403 
+
+@data.route("/api/data/contact/update", methods=["POST"])
+def handle_contact_status_update():
+    request_id = request.json.get("request_id", None)
+    new_status = request.json.get("new_status", None)
+    new_last_updated_date = datetime.today()
+
+    contact_request = Contact_Request.get_contact_request_by_id(request_id=request_id)
+    contact_request.set_status(new_status)
+    contact_request.set_last_updated_date(new_last_updated_date)
+
+    try:
+        db.session.commit()
+        return jsonify(None), 200
+    except:
         return jsonify(None), 403 

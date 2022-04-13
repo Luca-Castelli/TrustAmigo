@@ -17,6 +17,8 @@ import {
 } from "@heroicons/react/outline";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 
+import TrustAmigoLogo from "../assets/TrustAmigoLogo.png";
+
 const software = [
   {
     name: "Analytics",
@@ -106,11 +108,7 @@ function Navbar() {
           <div className="flex justify-start lg:w-0 lg:flex-1">
             <a href="/">
               <span className="sr-only">Workflow</span>
-              <img
-                className="h-8 w-auto sm:h-10"
-                src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                alt=""
-              />
+              <img className="h-10 lg:h-16" src={TrustAmigoLogo} alt="" />
             </a>
           </div>
           <div className="-mr-2 -my-2 md:hidden">
@@ -204,7 +202,7 @@ function Navbar() {
               href="/contact"
               className="text-base font-medium text-gray-500 hover:text-gray-900"
             >
-              List a Company
+              Contact Us!
             </a>
 
             {/* <Popover className="relative">
