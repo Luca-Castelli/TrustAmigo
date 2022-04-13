@@ -10,9 +10,11 @@ Full stack application split into 3 docker containers:
 - Sever: Python Flask
 - Front-end: React.js
 
-Dev and prod environments configured with seperate databases ready to go.
+Dev and prod environments configured with seperate entrypoint.sh, dockerfiles, and databases ready to go.
 
 - Dev: on startup entrypoint.sh clears, creates, and seeds a dev database.
 - Prod: on startup entrypoint.prod.sh does not disrupt existing prod database. Prod uses NGINX to handle proxying.
 
 ## GIF Demos
+
+![gifOfSearching](https://media.giphy.com/media/FAazGSnq96JABgLV5G/giphy.gif)
