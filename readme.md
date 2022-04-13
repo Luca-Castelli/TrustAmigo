@@ -18,4 +18,4 @@ Dev and prod environments configured with seperate entrypoint.sh, dockerfiles, a
 ## GIF Demos
 
 Search for a company from the home page.
-![gifOfSearching](demo/search.gif)
+![gifOfSearching](demos/search.gif)
