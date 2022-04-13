@@ -17,4 +17,5 @@ Dev and prod environments configured with seperate entrypoint.sh, dockerfiles, a
 
 ## GIF Demos
 
-![gifOfSearching](https://media.giphy.com/media/FAazGSnq96JABgLV5G/giphy.gif)
+Search for a company from the home page.
+![gifOfSearching](demo/search.gif)
