@@ -93,10 +93,6 @@ function ContactForm() {
 
   return (
     <div className="w-4/5 mx-auto pt-24 pb-16 px-4 grid items-center grid-cols-1 gap-x-8">
-      <h1 className="mb-16 text-2xl font-medium leading-6 text-indigo-500">
-        Sorry we don't have your company listed... let's fix that!
-      </h1>
-
       <div className="mt-10 sm:mt-0">
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-1">

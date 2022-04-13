@@ -20,12 +20,37 @@ function AdminPanelContactRequestsRow({ item, setReloadFlag }) {
 
   const updateStatus = async () => {
     const payload = {
-      request_id: id,
+      contact_request_id: id,
       new_status: newStatus,
     };
-    console.log(payload);
     try {
       const response = await fetch("/api/data/contact/update", {
+        method: "POST",
+        credentials: "same-origin",
+        headers: {
+          "content-type": "application/json",
+          "X-CSRFToken": csrfToken,
+        },
+        body: JSON.stringify(payload),
+      });
+      const data = await response.json();
+      if (response.status !== 200) {
+        console.log("Update failed.");
+      } else {
+        console.log("Update successful.");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setReloadFlag(true);
+  };
+
+  const deleteContactRequest = async () => {
+    const payload = {
+      contact_request_id: id,
+    };
+    try {
+      const response = await fetch("/api/data/contact/delete", {
         method: "POST",
         credentials: "same-origin",
         headers: {
@@ -67,6 +92,12 @@ function AdminPanelContactRequestsRow({ item, setReloadFlag }) {
           className="bg-indigo-500 text-white rounded-md p-1 ml-2"
         >
           Update Status
+        </button>
+        <button
+          onClick={deleteContactRequest}
+          className="bg-red-500 text-white rounded-md p-1 ml-2"
+        >
+          Delete
         </button>
       </td>
     </tr>

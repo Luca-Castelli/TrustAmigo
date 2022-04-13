@@ -267,12 +267,20 @@ class Contact_Request(db.Model):
             return None
     
     @staticmethod
-    def get_contact_request_by_id(request_id):
-        contact_request = db.session.query(Contact_Request).filter(Contact_Request.id == request_id).first()
+    def get_contact_request_by_id(contact_request_id):
+        contact_request = db.session.query(Contact_Request).filter(Contact_Request.id == contact_request_id).first()
         if contact_request:
             return contact_request
         else:
             return None 
+
+    @staticmethod
+    def delete_by_id(contact_request_id):
+        try:
+            db.session.query(Contact_Request).filter(Contact_Request.id == contact_request_id).delete()
+            return True
+        except:
+            return False
 
     def set_status(self, new_status):
         self.status = new_status

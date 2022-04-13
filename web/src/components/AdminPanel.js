@@ -60,9 +60,9 @@ function AdminPanel() {
     <div className="max-w-7xl mx-auto py-12 px-4 text-center">
       <h1 className="font-bold text-left my-8">Admin Panel</h1>
 
-      <h2 className="text-left mt-16 text-indigo-500">Pending Reviews</h2>
+      <h2 className="text-left mt-16 text-indigo-500 mb-4">Pending Reviews</h2>
       <table className="table w-full text-left">
-        <thead className="text-sm">
+        <thead className="text-sm text-slate-500">
           <tr>
             <th>Date</th>
             <th>Company</th>
@@ -85,9 +85,9 @@ function AdminPanel() {
         </tbody>
       </table>
 
-      <h2 className="text-left mt-16 text-indigo-500">Contact Requests</h2>
+      <h2 className="text-left mt-16 text-indigo-500 mb-4">Contact Requests</h2>
       <table className="table w-full text-left">
-        <thead className="text-sm">
+        <thead className="text-sm text-slate-500">
           <tr>
             <th>Created</th>
             <th>First Name</th>

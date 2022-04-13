@@ -23,5 +23,8 @@ Search for a company from the home page and view it's profile.
 Alternatively, search for software companies based on a category.
 ![gif_of_categories](demos/categories.gif)
 
-Write a review on a company profile.
+Write a review.
 ![gif_of_writing_a_review](demos/write_a_review.gif)
+
+Review won't show up on the profile right away, it'll need to verified by a TrustAmigo customer service rep first - which can be done from the admin panel.
+![gif_of_approving_a_review](demos/approve_a_review.gif)

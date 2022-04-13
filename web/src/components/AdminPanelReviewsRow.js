@@ -78,13 +78,13 @@ function AdminPanelReviewsRow({ item, setReloadFlag }) {
       <td>
         <button
           onClick={() => approveReview()}
-          className="bg-green-500 rounded-md p-1 w-20"
+          className="bg-green-500 text-white rounded-md p-1 w-20"
         >
           Approve
         </button>
         <button
           onClick={() => deleteReview()}
-          className="bg-red-500 rounded-md p-1 ml-2 w-20"
+          className="bg-red-500 text-white rounded-md p-1 ml-2 w-20"
         >
           Delete
         </button>

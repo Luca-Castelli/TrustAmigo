@@ -139,11 +139,11 @@ def handle_contact_request():
 
 @data.route("/api/data/contact/update", methods=["POST"])
 def handle_contact_status_update():
-    request_id = request.json.get("request_id", None)
+    contact_request_id = request.json.get("contact_request_id", None)
     new_status = request.json.get("new_status", None)
     new_last_updated_date = datetime.today()
 
-    contact_request = Contact_Request.get_contact_request_by_id(request_id=request_id)
+    contact_request = Contact_Request.get_contact_request_by_id(contact_request_id=contact_request_id)
     contact_request.set_status(new_status)
     contact_request.set_last_updated_date(new_last_updated_date)
 
@@ -152,3 +152,12 @@ def handle_contact_status_update():
         return jsonify(None), 200
     except:
         return jsonify(None), 403 
+
+@data.route("/api/data/contact/delete", methods=["POST"])
+def handle_delete_contact():
+    contact_request_id = request.json.get("contact_request_id", None)
+    if Contact_Request.delete_by_id(contact_request_id=contact_request_id):
+        db.session.commit()
+        return jsonify(None), 200
+    else:
+        return jsonify(None), 403
