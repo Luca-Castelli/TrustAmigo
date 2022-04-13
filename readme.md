@@ -17,5 +17,11 @@ Dev and prod environments configured with seperate entrypoint.sh, dockerfiles, a
 
 ## GIF Demos
 
-Search for a company from the home page.
-![gifOfSearching](demos/search.gif)
+Search for a company from the home page and view it's profile.
+![gif_of_searching](demos/search.gif)
+
+Alternatively, search for software companies based on a category.
+![gif_of_categories](demos/categories.gif)
+
+Write a review on a company profile.
+![gif_of_writing_a_review](demos/write_a_review.gif)
