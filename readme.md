@@ -17,6 +17,8 @@ Dev and prod environments configured with seperate entrypoint.sh, dockerfiles, a
 
 The application uses company data from Crunchbase's API. The free version only allows for a sample data download, so it's currently reading that in as a CSV. Ideally, with a paid subscription, the application would make periodic HTTP REST calls directly to the Crunchbase API using AppScheduler.
 
+I realize I should have certain files in my .gitignore such as the .env files, but given it's a project application with no real data or API keys, it's alright.
+
 ## GIF Demos
 
 Search for a company from the home page and view it's profile.
